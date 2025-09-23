@@ -13,9 +13,14 @@ import base64
 import io
 from io import StringIO
 from backend.app.data_storage import dataframe
+from langchain_core.prompts import PromptTemplate
+from pydantic import BaseModel, Field
 load_dotenv()
 
 os.environ["GOOGLE_API_KEY"] = os.getenv("GEMINI_API_KEY")
+
+class PandasQuery(BaseModel):
+    query: str = Field(..., description="A valid pandas query string to filter the DataFrame")
 
 def fig_to_base64(fig):
     buf = io.BytesIO()
@@ -91,10 +96,44 @@ def correlation(uuid: str, col1: str, col2: str) -> str:
 # Tool: Query the DataFrame with a pandas query string
 @tool
 def query_data(uuid: str , query: str) -> str:
-    """Run a pandas query on the DataFrame and return the first 10 rows as a string."""
+    """
+    Generate a valid pandas query string from a natural language question using an LLM.
+
+    Args:
+        user_question (str): A natural language question about filtering or querying a pandas DataFrame.
+
+    Returns:
+        str: A pandas query string that can be used with `DataFrame.query()` to filter data.
+
+    Example:
+        >>> generate_pandas_query("Show me all rows where Age is greater than 50 and Fare is less than 20")
+        "Age > 50 and Fare < 20"
+    """
+
+    # Create a prompt template instructing the LLM to produce a pandas query string
+    template_str = """
+    You are an assistant that converts natural language questions about a pandas DataFrame into valid pandas query strings.
+    Only output the query string without any explanation.
+
+    Question: {user_input}
+    """
+
+    # Create a PromptTemplate with one input variable
+    prompt = PromptTemplate.from_template(template_str)
+
+    # Initialize the LLM with structured output
+    llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0) 
+    structured_llm = llm.with_structured_output(PandasQuery)
+
+    # Compose a runnable chain: passthrough input -> prompt -> structured LLM
+    query_chain = prompt | structured_llm
+
     df = pd.read_json(StringIO(dataframe[uuid]))
+
+    result = query_chain.invoke({'user_input':query})
+    pandas_query = result.query
     try:
-        result = df.query(query)
+        result = df.query(pandas_query)
         if result.empty:
             return "Query returned no results."
         return result.head(10).to_string()

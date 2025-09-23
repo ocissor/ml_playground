@@ -7,4 +7,4 @@ temp.py
 /data/
 .env
 /eda_output/
-/.exp.py
+exp.py
