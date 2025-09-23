@@ -1,0 +1,11 @@
+/data
+/eda_outputs
+/ml_playground
+/ml_playground.egg-info
+.env
+.gitignore
+create_project_structure.py 
+exp.py
+temp.py
+README.md 
+

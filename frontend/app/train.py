@@ -1,9 +1,6 @@
 import streamlit as st
 import requests
 import json
-import base64
-from io import BytesIO  
-from PIL import Image
 from config import model_names, model_hyperparams, model_hyperparams_values
 from helper import generate_hyperparameters_widget
 
