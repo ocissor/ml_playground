@@ -1,0 +1,2 @@
+conversation_history = {}
+dataframe = {}

@@ -1,0 +1,10 @@
+temp.py
+/ml_playground/
+/__pycache__/
+/ml_playground.egg-info/
+/venv/
+/env/
+/data/
+.env
+/eda_output/
+/.exp.py
