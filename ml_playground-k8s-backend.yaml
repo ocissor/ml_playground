@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: ml-playground-backend-container
-        image: ml_playground_backend:latest  # Use local image
+        image: ml_playground_backend  # Use local image
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 8000
