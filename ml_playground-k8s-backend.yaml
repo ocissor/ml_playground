@@ -22,7 +22,7 @@ spec:
           - containerPort: 8000
         envFrom:
           - secretRef:
-              name: ml_playground-secrets 
+              name: ml-playground-secrets 
 
 ---
 apiVersion: v1
