@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ml_playground_backend
+  name: ml-playground-backend
   labels:
-    app: ml_playground_backend
+    app: ml-playground-backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ml_playground_backend
+      app: ml-playground-backend
   template:
     metadata:
       labels:
-        app: ml_playground_backend
+        app: ml-playground-backend
     spec:
       containers:
-      - name: ml_playground_backend-container
-        image: ml_playground_backend_image:latest  # Use local image
+      - name: ml-playground-backend-container
+        image: ml_playground_backend:latest  # Use local image
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 8000
@@ -28,11 +28,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ml_playground_backend-service
+  name: ml-playground-backend-service
 spec:
   type: LoadBalancer
   selector:
-    app: ml_playground_backend
+    app: ml-playground-backend
   ports:
     - protocol: TCP
       port: 8000
