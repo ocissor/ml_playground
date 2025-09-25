@@ -22,7 +22,7 @@ def viz_data(app_state):
             if st.button("Get Data Stats"):
                 try:
                     app_state.uploaded_file.seek(0)
-                    response = requests.post("http://127.0.0.1:8000/data_stats", files={"file": app_state.uploaded_file})
+                    response = requests.post("http://ml-playground-backend-service:8000/data_stats", files={"file": app_state.uploaded_file})
                     if response.status_code == 200:
                         response_json = response.json()
                         if 'data_stats' in response_json:
@@ -38,7 +38,7 @@ def viz_data(app_state):
             if st.button("Visualize Data"):
                 try:
                     app_state.uploaded_file.seek(0)
-                    response = requests.post("http://127.0.0.1:8000/visualize_data", files={"file": app_state.uploaded_file})
+                    response = requests.post("http://ml-playground-backend-service:8000/visualize_data", files={"file": app_state.uploaded_file})
                     if response.status_code == 200:
                         images = response.json()
                         if images:
@@ -66,7 +66,7 @@ def viz_data(app_state):
             with st.spinner("Generating response..."):
                 try:
                     app_state.uploaded_file.seek(0)
-                    response = requests.post("http://127.0.0.1:8000/chat_with_data", files = {"file":app_state.uploaded_file}, data = {"user_input":user_input, 'uuid':app_state.uuid})
+                    response = requests.post("http://ml-playground-backend-service:8000/chat_with_data", files = {"file":app_state.uploaded_file}, data = {"user_input":user_input, 'uuid':app_state.uuid})
                     if response.status_code == 200:
                         output = pickle.loads(response.content)
                         for message in reversed(output['messages'][-2:]):

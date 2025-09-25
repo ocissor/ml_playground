@@ -47,7 +47,7 @@ def train_app():
                         "hyperparameter": json.dumps(params)
                     }
                     try:
-                        response = requests.post("http://127.0.0.1:8000/train", files={"file": st.session_state.uploaded_file}, data=data)
+                        response = requests.post("http://ml-playground-backend-service:8000/train", files={"file": st.session_state.uploaded_file}, data=data)
                         if response.status_code == 200:
                             result = response.json()
                             if "error" in result:

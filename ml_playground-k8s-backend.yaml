@@ -30,7 +30,7 @@ kind: Service
 metadata:
   name: ml-playground-backend-service
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: ml-playground-backend
   ports:
