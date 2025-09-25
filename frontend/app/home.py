@@ -52,7 +52,7 @@ elif st.session_state.page == "upload_data":
     if uploaded_file:
         st.session_state.uploaded_file = uploaded_file
         try:
-            response = requests.post("http://127.0.0.1:8000/upload_file", files = {"file": uploaded_file}, data = {"uuid": st.session_state.uuid})
+            response = requests.post("http://ml-playground-backend-service:8000/upload_file", files = {"file": uploaded_file}, data = {"uuid": st.session_state.uuid})
             if response.status_code == 200:
                 response_json = response.json()
                 if 'message' in response_json:
