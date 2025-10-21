@@ -120,14 +120,5 @@ docker build -f Dockerfile.frontend -t ml_playground-frontend .
 - Add user authentication for multi-user experimentation
 - Add CI workflow and published Docker images
 
-## Contributing
-- Create a branch per feature: `git checkout -b feature/your-feature`
-- Run tests and add unit tests for changes
-- Open a PR with a clear description
 
-## License
-See the LICENSE file for details.
-
-## Acknowledgments
-- Contributors, inspirations and references used to build this project.
 
