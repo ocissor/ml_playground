@@ -3,8 +3,6 @@
 <!-- HEADER STYLE: CLASSIC -->
 <div align="center">
 
-<img src="readmeai/assets/logos/purple.svg" width="30%" style="position: relative; top: 0; right: 0;" alt="Project Logo"/>
-
 # ML_PLAYGROUND
 
 <em></em>
@@ -32,7 +30,7 @@
 <br>
 
 ---
-# ML_PLAYGROUND
+## Overview
 
 Lightweight playground to prototype ML experiments: a FastAPI backend for data processing and model serving, and a Streamlit frontend for quick EDA, visualization and training workflows.
 
@@ -132,3 +130,4 @@ See the LICENSE file for details.
 
 ## Acknowledgments
 - Contributors, inspirations and references used to build this project.
+
